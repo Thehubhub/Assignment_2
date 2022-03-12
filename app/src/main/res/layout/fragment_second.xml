@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    tools:context=".SecondFragment">
+
+    <TextView
+        android:id="@+id/frag2_display_text"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="EVENT CALENDAR"
+        android:textSize="30sp"
+        android:textColor="@color/teal_200"
+        android:background="@color/button_color"
+        android:textAlignment="center"
+        android:textStyle="bold"/>
+
+    <EditText
+        android:id="@+id/event_title_et"
+        android:hint="WHAT'S THE NAME?"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="90dp"/>
+
+
+    <EditText
+        android:id="@+id/event_category_et"
+        android:hint="WHAT IS IT FOR?"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="170dp"/>
+
+    <CalendarView
+        android:id="@+id/event_calendar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="260dp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/event_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="620dp"
+        android:text="ADD EVENT" />
+
+
+</FrameLayout>
