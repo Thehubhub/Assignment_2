@@ -29,6 +29,8 @@ class SecondFragment : Fragment() {
         FragmentSecondBinding.inflate(layoutInflater)
     }
 
+    private var selectedDate: String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -47,36 +49,31 @@ class SecondFragment : Fragment() {
     ): View? {
         binding.eventCalendar.setOnDateChangeListener { calendarView, i, i2, i3 ->
             Log.d("SECONDFRAG", calendarView.date.toString())
+
+            val realMonth = i2 + 1
+            selectedDate = if (realMonth < 10) {
+                "0$i2/$i3/$i"
+            } else {
+                "$i2/$i3/$i"
+            }
         }
 
         binding.eventButton.setOnClickListener {
             fragmentNavigation(
                 supportFragmentManager = requireActivity().supportFragmentManager,
-                FirstFragment.newInstance())
+                FirstFragment.newInstance(
+                    Event(
+                        title = binding.eventTitleEt.text.toString(),
+                        category = binding.eventCategoryEt.text.toString(),
+                        date = selectedDate ?: ""
+                    )
+                )
+            )
         }
         return binding.root
     }
 
-
-
-
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SecondFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            SecondFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        fun newInstance() = SecondFragment()
     }
 }
