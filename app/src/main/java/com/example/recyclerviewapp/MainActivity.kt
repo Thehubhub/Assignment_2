@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
+
     lateinit var textView: TextView
     var gameState: String? = null
     private val STATE_KEY= "STATE_KEY"

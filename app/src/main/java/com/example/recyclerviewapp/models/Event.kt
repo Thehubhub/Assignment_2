@@ -10,3 +10,7 @@ data class Event (
     val category: String,
     val date: String
     ) : Parcelable
+
+object SingletonEvent {
+    var eventList: MutableList<Event> = mutableListOf()
+}

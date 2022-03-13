@@ -7,10 +7,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recyclerviewapp.R
 import com.example.recyclerviewapp.models.Event
+import com.example.recyclerviewapp.models.SingletonEvent
 import kotlin.math.E
 
 class EventAdapter(
-    private val evenlist: MutableList<Event> = mutableListOf(),
+    private val evenlist: MutableList<Event> = SingletonEvent.eventList,
     private val onEventClicked: (Event) -> Unit
 ): RecyclerView.Adapter<EventViewHolder>() {
 
@@ -27,6 +28,7 @@ class EventAdapter(
         return EventViewHolder(eventView, onEventClicked)
     }
     override fun onBindViewHolder(holder: EventViewHolder, position: Int) {
+        evenlist.sortBy { it.date }
         val event = evenlist[position]
         holder.bind(event)
     }
@@ -50,7 +52,6 @@ class EventViewHolder(
 
         itemView.setOnClickListener {
             onEventClicked.invoke(event)
-
         }
     }
 }

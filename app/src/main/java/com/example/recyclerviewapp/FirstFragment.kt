@@ -9,38 +9,27 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.recyclerviewapp.adapter.EventAdapter
 import com.example.recyclerviewapp.databinding.FragmentFirstBinding
 import com.example.recyclerviewapp.models.Event
+import com.example.recyclerviewapp.view.ThirdFragment
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [FirstFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class FirstFragment : Fragment() {
-    private var param1: String? = null
-    private var param2: String? = null
+    private var newEvent: Event? = null
 
     private val binding by lazy {
         FragmentFirstBinding.inflate(layoutInflater)
     }
 
-    private var counter = 0;
-
     private val evenAdapter by lazy {
         EventAdapter(onEventClicked = {
-
+            fragmentNavigation(
+                supportFragmentManager = requireActivity().supportFragmentManager,
+                ThirdFragment.newInstance(it))
         })
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            newEvent = it.getParcelable("myEvent")
         }
     }
 
@@ -55,15 +44,17 @@ class FirstFragment : Fragment() {
             adapter = evenAdapter
         }
 
-
+        newEvent?.let {
+            evenAdapter.updateEventData(it)
+        }
 
         //binding button on 1st XML file
         binding.addEvent.setOnClickListener {
             fragmentNavigation(
                 supportFragmentManager = requireActivity().supportFragmentManager,
-                SecondFragment.newInstance("",""))
+                SecondFragment.newInstance())
         }
-        setRetainInstance(true);
+        retainInstance = true
         return binding.root
     }
 
